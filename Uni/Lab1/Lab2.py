@@ -1,0 +1,12 @@
+message = '''
+Baa, baa, black sheep
+        Have you any wool?
+    Yes sir, yes sir
+             Three bags full.
+One for my master
+    And one for the dame
+One for the little boy
+Who lives down the lane.
+'''
+
+print(message)

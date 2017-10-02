@@ -1,5 +1,5 @@
 class Square:
-    def __init__(self, height="0", width="0"):
+    def __init__(self, height=0, width=0):
         self.height = height
         self.width = width
 
@@ -12,7 +12,7 @@ class Square:
     @height.setter
     def height(self, value):
 
-        if value.isdigit():
+        if str(value).isdigit():
             self.__height = value
         else:
             print("Please only enter numbers for height")
@@ -26,7 +26,7 @@ class Square:
     @width.setter
     def width(self, value):
 
-        if value.isdigit():
+        if str(value).isdigit():
             self.__width = value
         else:
             print("Please only enter numbers for width")

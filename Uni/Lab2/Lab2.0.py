@@ -130,12 +130,12 @@ plt.show()
 
 # ----------------
 # HOW TO DEAL WITH MISSING VALUES
-latest_
+
 # shows in a lot of missing values in notesalaries.head()
 latest_salaries.isnull().any()
 latest_salaries.isnull().any().any()
 # nesting any goes up
-latest_salaries.isnull().sum()s
+latest_salaries.isnull().sum()
 latest_salaries = latest_salaries.drop('Notes', axis=1)
 latest_salaries.isnull().sum()
 # axis to say it is a column

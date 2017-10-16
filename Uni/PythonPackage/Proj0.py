@@ -12,35 +12,38 @@ from sklearn.cross_validation import train_test_split
 from sklearn import metrics
 from sklearn.metrics import classification_report
 
-vgsalesraw = pd.read_csv("vgsales.csv", low_memory=False)
+data = pd.read_csv("flights.csv", low_memory=False)
 
-#filter my data to include only most recent games by year - this also eliminates the rows where there is no information
-vgsales = vgsalesraw[((vgsalesraw['Year'] >= 2010) & (vgsalesraw['Year'] <= 2017))]
+flights = pd.DataFrame(data)
+flights.dropna(axis=1, how='any')
 
-#tells us the different features of the data
-print(vgsales.keys())
+columns_of_interest = flights['YEAR', 'DAY', 'FLIGHT_NUMBER', 'TAIL_NUMBER', 'ORIGIN_AIRPORT', 'DESTINATION_AIRPORT', 'DEPARTURE_TIME', 'DEPARTURE_DELAY', 'TAXI_OUT', 'WHEELS_OFF', 'SCHEDULED_TIME',
+                             'ELAPSED_TIME', 'AIR_TIME', 'WHEELS_ON', 'TAXI_IN', 'SCHEDULED_ARRIVAL',
+                             'ARRIVAL_TIME', 'DIVERTED', 'AIR_SYSTEM_DELAY',	'SECURITY_DELAY',
+                            'AIRLINE_DELAY','LATE_AIRCRAFT_DELAY', 'WEATHER_DELAY']
 
-print(vgsales.shape)
-vgsales["Genre"] = vgsales["Genre"].codes
-vgsales["Platform"] = vgsales["Platform"].codes
-
-vgs = pd.DataFrame(vgsales)
-
-# I use the any method of the dataframe to remove rows where there is even one 0 for sales
-# This way I ensure that I am comparing games that have been released across all the interested markets
-vgs = vgs[~(vgs == 0).any(axis=1)]
-print(pd.crosstab(vgs['Genre'], vgs['Platform'], rownames=["Genre"]))
+flights.drop(columns_of_interest, axis=1, inplace=True)
 
 
+#y0 = flights['AIRLINE'] == 'AS'
+#y1 = flights['AIRLINE'] == 'NK'
 
-print(vgs.std())
+#print(y0, y1)
 
-print(pd.crosstab(vgs['Genre'], vgs['Platform'], rownames=["Genre"]))
 
-#vgs.hist()
+print(flights.keys())
+print(flights.describe())
+
+#print(pd.crosstab(flights['CANCELLED'], flights['CANCELLATION_REASON'], rownames=["count"]))
+
+#flights.hist()
 #plt.show()
 
-#sb.boxplot(x='Platform', y='Global_Sales', data=vgs, palette='hls')
+#count = flights['CANCELLED'].count()
+#print("{} flights got cancelled in 2015.".format(count))
 
-sb.heatmap(vgs.corr())
-plt.show()
+#sb.boxplot(x='CANCELLED' == 1, y='CANCELLATION_REASON', data=flights, palette='hls')
+#plt.show()
+
+
+#sb.heatmap(input_raw.corr())

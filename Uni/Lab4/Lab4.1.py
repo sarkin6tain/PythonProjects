@@ -38,11 +38,10 @@ vgs = vgs[~(vgs == 0).any(axis=1)]
 
 #first replace 0 values with nan
 
-
 print(vgs.head())
 
-x = vgs.values[:, 6:10]
-y = vgs.values[:,3]
+x = vgs.values[:, 2, 3, 5]
+y = vgs.values[:,10]
 x_train, x_test, y_train, y_test =train_test_split( x, y, test_size = 0.25)
 
 lm = LinearRegression()
